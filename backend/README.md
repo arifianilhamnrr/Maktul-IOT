@@ -4,6 +4,59 @@ REST API FastAPI untuk menyimpan device dan riwayat status LED pada MariaDB.
 Dependency Python dan virtual environment dikelola menggunakan
 [`uv`](https://docs.astral.sh/uv/). Project ini tidak memerlukan Docker.
 
+## Instalasi `uv`
+
+### Windows
+
+Gunakan PowerShell:
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Alternatif menggunakan WinGet:
+
+```powershell
+winget install --id=astral-sh.uv -e
+```
+
+Tutup dan buka kembali terminal setelah instalasi agar perubahan `PATH`
+terbaca.
+
+### macOS
+
+Gunakan installer resmi:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Alternatif menggunakan Homebrew:
+
+```bash
+brew install uv
+```
+
+### Linux
+
+Gunakan installer resmi:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Jika `curl` tidak tersedia, gunakan `wget`:
+
+```bash
+wget -qO- https://astral.sh/uv/install.sh | sh
+```
+
+Setelah instalasi, buka ulang terminal dan verifikasi `uv`:
+
+```bash
+uv --version
+```
+
 ## Quick Start
 
 Jalankan seluruh command berikut dari folder `backend`:
