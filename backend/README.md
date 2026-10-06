@@ -83,9 +83,8 @@ uv run python scripts/smoke_test.py
 
 ## Persiapan Native
 
-Mesin pengembangan ini menggunakan CachyOS/Arch Linux. Paket utama yang
-dibutuhkan adalah `mariadb`, `apache`, `php`, `php-apache`, dan ekstensi MySQL
-untuk PHP. Layanan MariaDB dan Apache sudah diaktifkan pada mesin ini.
+Untuk environment Arch Linux, paket utama yang dibutuhkan adalah `mariadb`,
+`apache`, `php`, `php-apache`, dan ekstensi MySQL untuk PHP.
 
 Periksa layanan:
 
@@ -100,7 +99,7 @@ Jika belum aktif:
 sudo systemctl enable --now mariadb httpd
 ```
 
-Database aplikasi telah disiapkan dengan nilai berikut:
+Konfigurasi database development menggunakan nilai berikut:
 
 ```text
 Database: led_test
@@ -119,8 +118,7 @@ uv run fastapi dev
 ```
 
 Konfigurasi koneksi development berada pada konstanta `DATABASE_URL` di
-`src/backend/database.py`. Jangan gunakan password default tersebut untuk
-deployment production.
+`src/backend/database.py`.
 
 ## Struktur Database
 

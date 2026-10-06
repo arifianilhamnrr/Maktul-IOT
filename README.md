@@ -60,7 +60,7 @@ Buat file `include/secrets.h`:
 #define WIFI_PASSWORD ""
 ```
 
-File tersebut diabaikan Git agar token tidak masuk repository.
+Sesuaikan nilai token dan WiFi dengan environment yang digunakan.
 
 Build firmware dari terminal:
 
@@ -95,9 +95,3 @@ uv run fastapi dev
 
 Backend tersedia di `http://127.0.0.1:8000` dan dokumentasi interaktifnya di
 `http://127.0.0.1:8000/docs`.
-
-## Keamanan
-
-- Jangan commit `include/secrets.h`.
-- Jangan memakai password database development untuk production.
-- Generate ulang Blynk Auth Token jika token pernah terpublikasi.
