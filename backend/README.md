@@ -1,8 +1,76 @@
 # LED Test Backend
 
-Backend FastAPI dengan stack web development native: Apache, PHP, dan MariaDB.
+REST API FastAPI untuk menyimpan device dan riwayat status LED pada MariaDB.
 Dependency Python dan virtual environment dikelola menggunakan
 [`uv`](https://docs.astral.sh/uv/). Project ini tidak memerlukan Docker.
+
+## Quick Start
+
+Jalankan seluruh command berikut dari folder `backend`:
+
+```bash
+cd backend
+```
+
+Pastikan Python 3.12+, `uv`, dan MariaDB sudah tersedia. Sinkronkan dependency:
+
+```bash
+uv sync
+```
+
+Buat database dan user development dengan membuka prompt MariaDB:
+
+```bash
+sudo mariadb
+```
+
+Jalankan SQL berikut:
+
+```sql
+CREATE DATABASE IF NOT EXISTS led_test
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+CREATE USER IF NOT EXISTS 'led_user'@'localhost'
+  IDENTIFIED BY 'led_password';
+
+GRANT ALL PRIVILEGES ON led_test.* TO 'led_user'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+```
+
+Jalankan migrasi database:
+
+```bash
+uv run alembic upgrade head
+```
+
+Jalankan server development:
+
+```bash
+uv run fastapi dev
+```
+
+Server tersedia di `http://127.0.0.1:8000`. Buka dokumentasi Swagger di
+`http://127.0.0.1:8000/docs`.
+
+Verifikasi koneksi API dan database dari terminal lain:
+
+```bash
+curl http://127.0.0.1:8000/health
+```
+
+Respons yang berhasil:
+
+```json
+{"status":"ok","database":"connected"}
+```
+
+Jalankan smoke test untuk memeriksa health check, pembuatan device, dan status LED:
+
+```bash
+uv run python scripts/smoke_test.py
+```
 
 ## Layanan
 
@@ -145,4 +213,26 @@ PowerShell di Windows:
 
 ```powershell
 .venv\Scripts\Activate.ps1
+```
+
+## Troubleshooting
+
+Jika `/health` mengembalikan HTTP 503, pastikan MariaDB aktif dan kredensial
+database sesuai dengan `src/backend/database.py`:
+
+```bash
+sudo systemctl start mariadb
+mariadb -u led_user -p led_test
+```
+
+Jika tabel belum ditemukan, jalankan ulang migrasi dari folder `backend`:
+
+```bash
+uv run alembic upgrade head
+```
+
+Jika port 8000 sedang digunakan, pilih port lain:
+
+```bash
+uv run fastapi dev --port 8001
 ```
