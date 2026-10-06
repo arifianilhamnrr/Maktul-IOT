@@ -1,0 +1,22 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "FastAPI backend for the LED Test project"
+readme = "README.md"
+authors = [
+    { name = "Arifian Ilham Nur Riandana", email = "180601881+arifianilhamnrr@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.16.5",
+    "asyncmy>=0.2.10",
+    "fastapi[standard]>=0.142.2",
+    "sqlalchemy[asyncio]>=2.0.43",
+]
+
+[tool.fastapi]
+entrypoint = "backend.main:app"
+
+[build-system]
+requires = ["uv_build>=0.12.21,<0.13.0"]
+build-backend = "uv_build"
